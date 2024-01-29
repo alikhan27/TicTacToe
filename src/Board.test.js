@@ -144,4 +144,18 @@ describe('Should create the Tic Tac Toe Board Game', () => {
         expect(msg).toHaveTextContent('');
     });
 
+    it('Should start with player ONE after reset', () => {
+        render(<Board/>);
+        const btnStart = screen.getByTestId('btn-start');
+        fireEvent.click(btnStart);
+        const columns = screen.getAllByTestId('column');
+        fireEvent.click(columns[0]);
+        fireEvent.click(columns[8]);
+        const btnReset = screen.getByTestId('btn-reset');
+        fireEvent.click(btnReset);
+        fireEvent.click(btnStart);
+        let msg = screen.getByRole('heading', {level: 2});
+        expect(msg).toHaveTextContent('Player ONE turn now...');
+    });
+
 })
