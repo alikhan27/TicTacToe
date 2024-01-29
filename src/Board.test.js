@@ -51,4 +51,12 @@ describe('Should create the Tic Tac Toe Board Game', () => {
             expect(square).not.toHaveAttribute('disabled');
         })
     })
+
+    it('Should  have the message "Player ONE turn now..." on Start Button Click', () => {
+        render(<Board/>);
+        const btnStart = screen.getByTestId('btn-start');
+        const msg = screen.getByRole('heading', {level: 2});
+        fireEvent.click(btnStart);
+        expect(msg).toHaveTextContent('Player ONE turn now...');
+    });
 })
