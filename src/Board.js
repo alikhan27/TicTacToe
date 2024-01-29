@@ -8,9 +8,12 @@
             disabled: true
         }),
         playerONEPlaying: "Player ONE turn now...",
+        playerTWOPlaying: "Player TWO turn now...",
     }
     const [board, updateBoard] = useState(boardConfig.squares);
     const [msg, setMsg] = useState('');
+    const [currentPlayer, setCurrentPlayer] = useState(0);
+    const [count, setCount] = useState(0);
     const handleStartGame = () => {
         let newboard = board.map((square) => {
             square.disabled = false;
@@ -20,13 +23,32 @@
         updateBoard(newboard);
         setMsg(boardConfig.playerONEPlaying)
     }
-    
+    const handlePlay = (prop) => {
+        let newboard = board.map((square, index) => {
+
+            return square = index === prop ? {
+                disabled: true,
+                value: currentPlayer ? "O" : "X"
+            }
+                : square
+        }
+
+        )
+        updateBoard(newboard);
+        setCount(count+1);
+        setCurrentPlayer(+!currentPlayer);
+        currentPlayer ? setMsg(boardConfig.playerONEPlaying) : setMsg(boardConfig.playerTWOPlaying);
+
+    }
     return <>
         <h1>Tic Tac Toe</h1>
         <div className="board">
             {board.map((square, index) => {
                 return (
-                    <button key={index} disabled={square?.disabled} className="square" data-testid="column">
+                    <button key={index} disabled={square?.disabled} className="square" data-testid="column"
+                    onClick={() => {
+                        handlePlay(index)
+                    }}>
                         {square?.value}
                     </button>
                 )

@@ -58,5 +58,31 @@ describe('Should create the Tic Tac Toe Board Game', () => {
         const msg = screen.getByRole('heading', {level: 2});
         fireEvent.click(btnStart);
         expect(msg).toHaveTextContent('Player ONE turn now...');
-    });
+    })
+
+    it('Should fill the Square with "X" on First Click', () => {
+        render(<Board/>);
+        const btnStart = screen.getByTestId('btn-start');
+        fireEvent.click(btnStart);
+        const columns = screen.getAllByTestId('column');
+        fireEvent.click(columns[0]);
+        const msg = screen.getByRole('heading', {level: 2});
+        expect(columns[0]).toHaveTextContent('X');
+        expect(columns[0]).toHaveAttribute('disabled');
+        expect(msg).toHaveTextContent('Player TWO turn now...');
+    })
+
+    it('Should fill the Square with "O" on Second Click', () => {
+        render(<Board/>);
+        const btnStart = screen.getByTestId('btn-start');
+        fireEvent.click(btnStart);
+        const columns = screen.getAllByTestId('column');
+        fireEvent.click(columns[0]);
+        fireEvent.click(columns[1]);
+        const msg = screen.getByRole('heading', {level: 2});
+        expect(columns[1]).toHaveTextContent('O');
+        expect(columns[1]).toHaveAttribute('disabled');
+        expect(msg).toHaveTextContent('Player ONE turn now...');
+    })
+
 })
