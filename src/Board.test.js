@@ -114,4 +114,22 @@ describe('Should create the Tic Tac Toe Board Game', () => {
         expect(msg).toHaveTextContent('Player TWO is the !!!Winner!!!');
     })
 
+    it("Should announce Match Drawn", () => {
+        render(<Board/>);
+        const btnStart = screen.getByTestId('btn-start');
+        fireEvent.click(btnStart);
+        const columns = screen.getAllByTestId('column');
+        fireEvent.click(columns[0]);//player ONE
+        fireEvent.click(columns[1]);//player TWO
+        fireEvent.click(columns[2]);//player ONE
+        fireEvent.click(columns[3]);//player TWO
+        fireEvent.click(columns[4]);//player ONE
+        fireEvent.click(columns[5]);//player TWO
+        fireEvent.click(columns[7]);//player ONE
+        fireEvent.click(columns[6]);//player TWO
+        fireEvent.click(columns[8]);//player ONE
+        const msg = screen.getByRole('heading', {level: 2});
+        expect(msg).toHaveTextContent('Match is Draw!!');
+    })
+
 })

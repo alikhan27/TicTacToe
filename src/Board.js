@@ -21,6 +21,7 @@
         winnerPlayerTWO: "Player TWO is the !!!Winner!!!",
         playerONEPlaying: "Player ONE turn now...",
         playerTWOPlaying: "Player TWO turn now...",
+        matchDraw: "Match is Draw!!"
     }
     const [board, updateBoard] = useState(boardConfig.squares);
     const [msg, setMsg] = useState('');
@@ -71,6 +72,9 @@
             if(winnerOne || winnerTwo)  {
                 freezeBoard();
                 return;
+            }
+            if(count === 9 && !winnerOne && !winnerTwo) {
+                setMsg(boardConfig.matchDraw);
             }
         });
         
