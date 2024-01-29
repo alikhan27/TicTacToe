@@ -29,4 +29,16 @@ describe('Should create the Tic Tac Toe Board Game', () => {
             expect(square).toHaveTextContent('');
         })
     })
+
+    it('Should have button with Start Text', () => {
+        render(<Board/>);
+        const btnStart = screen.getByTestId('btn-start');
+        expect(btnStart).toBeInTheDocument();
+    })
+
+    it('Should have button with Reset Text', () => {
+        render(<Board/>);
+        const btnReset = screen.getByTestId('btn-reset');
+        expect(btnReset).toBeInTheDocument();
+    })
 })

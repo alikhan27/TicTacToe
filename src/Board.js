@@ -21,6 +21,10 @@
                 )
             })}
         </div>
+        <div className="buttons">
+            <button className="btn-start" data-testid="btn-start">Start</button>
+            <button className="btn-reset" data-testid="btn-reset">Reset</button>
+        </div>
     </>
  }
  export default Board;
