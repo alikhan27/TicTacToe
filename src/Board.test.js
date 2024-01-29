@@ -8,4 +8,9 @@ describe('Should create the Tic Tac Toe Board Game', () => {
         expect(heading).toHaveTextContent('Tic Tac Toe');
     })
 
+    it('Should render 9 squares', () => {
+        render(<Board/>);
+        const squares = screen.getAllByTestId('column').length;
+        expect(squares).toBe(9);
+    })
 })
