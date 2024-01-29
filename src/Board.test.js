@@ -1,4 +1,4 @@
-import { screen, render } from "@testing-library/react";
+import { screen, render, fireEvent } from "@testing-library/react";
 import Board from "./Board";
 
 describe('Should create the Tic Tac Toe Board Game', () => {
@@ -40,5 +40,15 @@ describe('Should create the Tic Tac Toe Board Game', () => {
         render(<Board/>);
         const btnReset = screen.getByTestId('btn-reset');
         expect(btnReset).toBeInTheDocument();
+    })
+
+    it('Should have squares button to be enabled on Start Button Click', () => {
+        render(<Board/>);
+        const btnStart = screen.getByTestId('btn-start');
+        fireEvent.click(btnStart);
+        const squares = screen.getAllByTestId('column');
+        squares.forEach(square => {
+            expect(square).not.toHaveAttribute('disabled');
+        })
     })
 })

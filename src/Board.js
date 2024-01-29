@@ -8,8 +8,18 @@
             disabled: true
         })
     }
-    const [board] = useState(boardConfig.squares);
+    const [board, updateBoard] = useState(boardConfig.squares);
 
+    const handleStartGame = () => {
+        let newboard = board.map((square) => {
+            square.disabled = false;
+            return square;
+        }
+        )
+        updateBoard(newboard);
+        
+    }
+    
     return <>
         <h1>Tic Tac Toe</h1>
         <div className="board">
@@ -22,7 +32,7 @@
             })}
         </div>
         <div className="buttons">
-            <button className="btn-start" data-testid="btn-start">Start</button>
+            <button className="btn-start" data-testid="btn-start" onClick={handleStartGame}>Start</button>
             <button className="btn-reset" data-testid="btn-reset">Reset</button>
         </div>
     </>
