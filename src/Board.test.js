@@ -85,4 +85,33 @@ describe('Should create the Tic Tac Toe Board Game', () => {
         expect(msg).toHaveTextContent('Player ONE turn now...');
     })
 
+    it("Should announce winner as player ONE [0,1,2]  and freeze the board", () => {
+        render(<Board/>);
+        const btnStart = screen.getByTestId('btn-start');
+        fireEvent.click(btnStart);
+        const columns = screen.getAllByTestId('column');
+        fireEvent.click(columns[0]);//player ONE
+        fireEvent.click(columns[8]);//player TWO
+        fireEvent.click(columns[1]);//player ONE
+        fireEvent.click(columns[7]);//player TWO
+        fireEvent.click(columns[2]);//player ONE
+        const msg = screen.getByRole('heading', {level: 2});
+        expect(msg).toHaveTextContent('Player ONE is the !!!Winner!!!');
+    })
+
+    it("Should announce winner as player TWO [2,4,6]  and freeze the board", () => {
+        render(<Board/>);
+        const btnStart = screen.getByTestId('btn-start');
+        fireEvent.click(btnStart);
+        const columns = screen.getAllByTestId('column');
+        fireEvent.click(columns[0]);//player ONE
+        fireEvent.click(columns[4]);//player TWO
+        fireEvent.click(columns[1]);//player ONE
+        fireEvent.click(columns[2]);//player TWO
+        fireEvent.click(columns[5]);//player ONE
+        fireEvent.click(columns[6]);//player TWO
+        const msg = screen.getByRole('heading', {level: 2});
+        expect(msg).toHaveTextContent('Player TWO is the !!!Winner!!!');
+    })
+
 })
