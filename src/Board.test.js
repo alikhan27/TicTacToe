@@ -132,4 +132,16 @@ describe('Should create the Tic Tac Toe Board Game', () => {
         expect(msg).toHaveTextContent('Match is Draw!!');
     })
 
+    it('Should reset the board and message on Reset Button click', () => {
+        render(<Board/>);
+        const btnStart = screen.getByTestId('btn-start');
+        fireEvent.click(btnStart);
+        const btnReset = screen.getByTestId('btn-reset');
+        let msg = screen.getByRole('heading', {level: 2});
+        expect(msg).toHaveTextContent('Player ONE turn now...');
+        fireEvent.click(btnReset);
+        msg = screen.getByRole('heading', {level: 2});
+        expect(msg).toHaveTextContent('');
+    });
+
 })

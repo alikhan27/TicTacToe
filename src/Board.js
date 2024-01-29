@@ -87,6 +87,19 @@
         )
         updateBoard(newboard);
     }
+    const handleResetGame = () => {
+        let newboard = board.map((square) => {
+            square.disabled = true;
+            square.value = '';
+            return square;
+        }
+        )
+        updateBoard(newboard);
+        
+        setCurrentPlayer(0);
+        setCount(0);
+        setMsg('');
+    }
     useEffect(() => {
         findWinner();
     }, [msg]);
@@ -107,7 +120,7 @@
         <div className="message"><h2>{msg}</h2></div>
         <div className="buttons">
             <button className="btn-start" data-testid="btn-start" onClick={handleStartGame}>Start</button>
-            <button className="btn-reset" data-testid="btn-reset">Reset</button>
+            <button className="btn-reset" data-testid="btn-reset" onClick={handleResetGame}>Reset</button>
         </div>
     </>
  }
