@@ -21,4 +21,12 @@ describe('Should create the Tic Tac Toe Board Game', () => {
             expect(square).toHaveAttribute('disabled');
         })
     })
+
+    it('Should have squares button text to be empty', () => {
+        render(<Board/>);
+        const squares = screen.getAllByTestId('column');
+        squares.forEach(square => {
+            expect(square).toHaveTextContent('');
+        })
+    })
 })
